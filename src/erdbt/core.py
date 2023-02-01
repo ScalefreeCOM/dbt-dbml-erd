@@ -29,7 +29,7 @@ def createTable(dbml_path, model):
     """Create a table in the dbml file. 
 
     Args:
-        dbml_path (str): The file path where the table will be stored in DBML format
+        dbml_path (str): The file path where the table will be stored in dbml format
         model (dict): The dbt model to extract the table and columns from
 
     """  
@@ -63,8 +63,7 @@ def relatedModels(manifest, test_name):
     related_models = []
 
     for node in manifest["nodes"].values():
-        if "test_metadata" in node:
-            if node["test_metadata"]["name"] == test_name:
+        if "test_metadata" in node and node["test_metadata"].get("name") == test_name:
                 related_models.append(node["refs"][0][0].upper())
                 related_models.append(node["refs"][1][0].upper())
 
@@ -96,8 +95,8 @@ def genereatedbml(manifest_path, catalog_path, dbml_path, test_name):
     """Create a dbml file for a dbt manifest.
 
     Args:
-        manifest_path (Path): Path to the dbt manifest file
-        catalog_path (Path): Path to the dbt catalog file
+        manifest_path (str): Path to the dbt manifest file
+        catalog_path (str): Path to the dbt catalog file
         dbml_path (str): Path and file name of the generated dbml file (e.g. "/path/to/file.dbml")
         test_name (str): Name of the relationship test to be used to extract relationships from the dbt manifest.
 
