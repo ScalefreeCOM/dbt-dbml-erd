@@ -36,8 +36,8 @@ def createTable(dbml_path, model):
         model (dict): The dbt model to extract the table and columns from
 
     """
-    name = model["metadata"]["name"]
-    schema = model["metadata"]["schema"]
+    name = model["metadata"]["name"].lower()
+    schema = model["metadata"]["schema"].lower()
     columns = list(model["columns"].keys())
     start = "{"
     end = "}"
@@ -46,8 +46,8 @@ def createTable(dbml_path, model):
 
     for column_name in columns:
         column = model["columns"][column_name]
-        name = column["name"]
-        dtype = column["type"]
+        name = column["name"].lower()
+        dtype = column["type"].lower()
 
         dbml_path.write(f"{name} {dtype} \n")
     dbml_path.write(f"{end} \n")
@@ -66,9 +66,9 @@ def relatedModels(manifest, test_name):
     related_models = []
 
     for node in manifest["nodes"].values():
-        if "test_metadata" in node and node["test_metadata"].get("name") == test_name:
-            related_models.append(node["refs"][0][0].upper())
-            related_models.append(node["refs"][1][0].upper())
+        if "test_metadata" in node and node["test_metadata"].get("name").lower() == test_name.lower():
+            related_models.append(node["refs"][0][0].lower())
+            related_models.append(node["refs"][1][0].lower())
 
     related_models = list(set(related_models))
 
@@ -86,10 +86,9 @@ def createRelatonship(dbml_path, manifest, test_name):
     rel_list = []
 
     for node in manifest["nodes"].values():
-        if "test_metadata" in node:
-            if node["test_metadata"]["name"] == test_name:
-                rel_list.append((node["refs"][0][0].upper(), node["test_metadata"]["kwargs"]["field"].upper(),
-                                 node["refs"][1][0].upper(), node["test_metadata"]["kwargs"]["column_name"].upper()))
+        if "test_metadata" in node and node["test_metadata"]["name"].lower() == test_name.lower():
+            rel_list.append((node["refs"][0][0].lower(), node["test_metadata"]["kwargs"]["field"].lower(),
+                             node["refs"][1][0].lower(), node["test_metadata"]["kwargs"]["column_name"].lower()))
 
     rel_list = list(set(rel_list))
 
@@ -117,6 +116,6 @@ def genereatedbml(manifest_path, catalog_path, dbml_path, test_name):
     with open(dbml_path, "w") as dbml_file:
         for model_name in model_names:
             model = catalog["nodes"][model_name]
-            if model["metadata"]["name"] in related_models:
+            if model["metadata"]["name"].lower() in related_models:
                 createTable(dbml_file, model)
         createRelatonship(dbml_file, manifest, test_name)
