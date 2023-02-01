@@ -15,6 +15,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        erdbt=erdbt.cli:cli
+        erdbt=erdbt.terminal:cli
     ''',
 )
