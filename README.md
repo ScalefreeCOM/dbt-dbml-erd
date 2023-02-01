@@ -9,10 +9,10 @@ It should be noted that the information about relationships comes from the dbt r
 
 ## Installation
 
-1. Clone this repository and navigate to the `src` folder. Run:
+1. Clone this repository to a folder and run:
 
 ```
-pip install
+pip install src/
 ```
 
 or install directly from git using the following command:
@@ -22,11 +22,6 @@ pip install -U git+https://github.com/ScalefreeCOM/dbt_dbml_erd#subdirectory=src
 ```
 
 2. Set up the dbdocs cli for diagram creation by following the [instructions here](https://dbdocs.io/docs)
-3. Test the tool by running the following command:
-
-```
-erdbt tests/manifest.json tests/catalog.json test.dbml test True
-```
 
 ## Usage
 
@@ -34,7 +29,7 @@ To use this application in your own project, run the `erdbt` command with the fo
 
 1. Path to the dbt `manifest.json`
 2. Path to the dbt `catalog.json`
-3. Path and file name to store the dbml file
+3. Path to the dbml file `foo.dbml`
 4. Name of the project on dbdocs.io
 5. `True` or `False` if you want to visualize the dbml file on dbdocs.io
 6. (optional) Name of your relationships test
