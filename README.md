@@ -22,14 +22,19 @@ pip install -U git+https://github.com/ScalefreeCOM/dbt_dbml_erd#subdirectory=src
 ```
 
 2. Set up the dbdocs cli for diagram creation by following the [instructions here](https://dbdocs.io/docs)
+3. Test erdbt with the following command:
+
+```
+erdbt test/manifest.json test/catalog.json test.dbml test True
+```
 
 ## Usage
 
-To use this application in your own project, run the `erdbt` command with the following parameters in order:
+To use this application in your project, run the `erdbt` command with the following parameters in order:
 
 1. Path to the dbt `manifest.json`
 2. Path to the dbt `catalog.json`
-3. Path to the dbml file `foo.dbml`
+3. Path to store the dbml file
 4. Name of the project on dbdocs.io
 5. `True` or `False` if you want to visualize the dbml file on dbdocs.io
 6. (optional) Name of your relationships test
