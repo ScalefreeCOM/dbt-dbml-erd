@@ -1,4 +1,4 @@
-# dbt_dbml_erd
+# dbt-dbml-erd
 A Python application that creates Entity Relationship Diagrams (ERDs) in dbt projects using the open-source dbml language and the [dbdocs](https://dbdocs.io/) tool for visualization.
 
 The app requires the following artifacts to create the dbml file:
@@ -18,7 +18,7 @@ pip install src/
 or install directly from git using the following command:
 
 ```
-pip install -U git+https://github.com/ScalefreeCOM/dbt_dbml_erd#subdirectory=src
+pip install -U git+https://github.com/ScalefreeCOM/dbt-dbml-erd#subdirectory=src
 ```
 
 2. Set up the dbdocs cli for diagram creation by following the [instructions here](https://dbdocs.io/docs)
