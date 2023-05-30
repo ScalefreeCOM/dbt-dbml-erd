@@ -52,7 +52,7 @@ def createTable(dbml_path, model):
         col_comment = column["comment"]
 
         dbml_path.write(f"{name} {dtype} [note: '{col_comment}']\n")
-    dbml_path.write(f"Note: '{comment}' \n {end} \n")
+    dbml_path.write(f"Note: '{comment}'\n{end}\n")
 
 
 def relatedModels(manifest, test_name):
