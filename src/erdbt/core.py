@@ -38,6 +38,7 @@ def createTable(dbml_path, model):
     """
     name = model["metadata"]["name"].lower()
     schema = model["metadata"]["schema"].lower()
+    comment = model["metadata"]["comment"]
     columns = list(model["columns"].keys())
     start = "{"
     end = "}"
@@ -48,9 +49,10 @@ def createTable(dbml_path, model):
         column = model["columns"][column_name]
         name = column["name"].lower()
         dtype = column["type"].lower()
+        col_comment = column["comment"]
 
-        dbml_path.write(f"{name} {dtype} \n")
-    dbml_path.write(f"{end} \n")
+        dbml_path.write(f"{name} {dtype} [note: '{col_comment}']\n")
+    dbml_path.write(f"Note: '{comment}' \n {end} \n")
 
 
 def relatedModels(manifest, test_name):
