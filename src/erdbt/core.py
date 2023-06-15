@@ -67,8 +67,8 @@ def relatedModels(manifest, test_name):
 
     for node in manifest["nodes"].values():
         if "test_metadata" in node and node["test_metadata"].get("name").lower() == test_name.lower():
-            related_models.append(node["refs"][0][0].lower())
-            related_models.append(node["refs"][1][0].lower())
+            related_models.append(node["refs"][0]["name"].lower())
+            related_models.append(node["refs"][1]["name"].lower())
 
     related_models = list(set(related_models))
 
