@@ -25,8 +25,9 @@ def cli(manifest_path, catalog_path, erd_path, project_name, visualize, test_nam
     except Exception as e:
         print(f"Error: {e}")
     if visualize:
+        password = '$c@lefree123'
         try:
-            result = subprocess.run(f"dbdocs build {erd_path} --project {project_name}", text=True, shell=True, check=True)
+            result = subprocess.run(f"dbdocs build {erd_path} --project {project_name} --password {password}", text=True, shell=True, check=True)
         except FileNotFoundError as e:
             print(f"Error: {e}")
         except subprocess.CalledProcessError as e:
